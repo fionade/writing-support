@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+    <link rel="stylesheet" type="text/css" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+	<style>
+		.axis path, .axis line {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        
+        .tick {
+            stroke-dasharray: 1, 2;
+        }
+        
+        .bar {
+            fill: FireBrick;
+        }
+	
+	</style>
+
+  </head>
+  <body>
+    
+    <svg class="chart" id="chart" width="600" height="500"></svg>
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+      function onSuccess(lineData) {
+        if (!lineData || lineData.length == 0) {
+          return;
+        }
+      
+        var timeFormat = d3.time.format("%X");
+        
+        var vis = d3.select("#chart");
+        var width = 600;
+        var height = 500;
+        var margins = {
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 50
+        };
+        
+        var xRange = d3.time.scale().range([margins.left, width - margins.right]).domain([d3.min(lineData, function (d) {
+            return d.time;
+          }),
+          d3.max(lineData, function (d) {
+            return d.time;
+          })
+        ]);
+        
+        var minY = 0;
+        var maxY = d3.max(lineData, function (d) {
+            return Math.max(d.length, d.cursorOffset);
+          });
+        
+        var yRange = d3.scale.linear().range([height - margins.top, margins.bottom]).domain([minY, maxY]);
+        var selectionRange = d3.scale.linear().range([0, height - margins.top - margins.bottom]).domain([0, maxY]);
+        
+        var xAxis = d3.svg.axis()
+          .scale(xRange)
+          .tickSize(5)
+          .tickSubdivide(true)
+          .tickFormat(timeFormat);
+        
+        var yAxis = d3.svg.axis()
+          .scale(yRange)
+          .tickSize(5)
+          .orient("left")
+          .tickSubdivide(true);
+        
+        
+        var lengthFunction = d3.svg.line()
+          .x(function (d) {
+            return xRange(d.time);
+          })
+          .y(function (d) {
+            return yRange(d.length);
+          })
+          .interpolate('basis');
+        
+        var cursorFunc = d3.svg.line()
+          .x(function (d) {
+            return xRange(d.time);
+          })
+          .y(function (d) {
+            if (d.cursorOffset) {
+              return yRange(d.cursorOffset);
+            }
+            else {
+              return yRange(1);
+            }
+          });
+        
+        var meanY = (maxY + minY) / 2;
+        /*var activeFunc = d3.svg.line()
+          .x(function (d) {
+            return xRange(d.time);
+          })
+          .y(function (d) {
+            if (d.visible) {
+              return yRange(meanY);
+            }
+            else {
+              return yRange(minY);
+            }
+          });*/
+          
+        // tab visible
+        vis.selectAll("bar")
+          .data(lineData)
+        .enter().append("rect")
+          .style("fill", "#ffcccc")
+          .attr("width", "1px")
+          .attr("x", function(d) { return xRange(d.time); })
+          .attr("y", yRange(maxY))
+          .attr("height", function(d) {
+              if (d.visible) {
+                return height - margins.top - margins.bottom;
+              }
+              else {
+                return 0;
+              }
+            });
+//          .enter().append("title");
+//          .text(function(d) {
+//              return d.headingStyles;
+//            });
+
+        // selection
+        vis.selectAll("selection")
+          .data(lineData)
+        .enter().append("rect")
+          .style("fill", "darkgreen")
+          .attr("width", "1px")
+          .attr("x", function(d) { return xRange(d.time); })
+          .attr("y", function(d) {
+              if (d.selection) {
+                return yRange(Math.max(d.selection[0], d.selection[1]));
+              }
+              else {
+                return 0;
+              }
+            })
+          .attr("height", function(d) {
+              if (d.selection) {
+                return selectionRange(Math.max(d.selection[1], d.selection[0]) - Math.min(d.selection[1], d.selection[0]));
+              }
+              else {
+                return 0;
+              }
+            });
+                 
+        // length of the document
+        vis.append("svg:path")
+          .attr("d", lengthFunction(lineData))
+          .attr("stroke", "blue")
+          .attr("fill", "none");
+        
+        // cursor position
+        vis.append("svg:path")
+          .attr("d", cursorFunc(lineData))
+          .attr("stroke", "green")
+          .attr("fill", "none");
+        
+        vis.append("svg:g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + (height - margins.bottom) + ")")
+          .call(xAxis);
+        
+        vis.append("svg:g")
+          .attr("class", "y axis")
+          .attr("transform", "translate(" + (margins.left) + ",0)")
+          .call(yAxis);
+        
+      }
+      
+      google.script.run
+        .withSuccessHandler(onSuccess)
+        //.withFailureHandler(onFailure)
+        .getDocumentStatistics(true);
+
+    </script>
+  </body>
+</html>

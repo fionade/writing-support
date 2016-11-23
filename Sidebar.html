@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+    <style>
+      h2 {
+        font-size : 100%;
+        font-weight: bold;
+      }
+      
+      p {
+        font-size: 95%;
+      }
+    
+      .result-header {
+        font-weight: bold;
+      }
+      
+      .width-100 {
+        width: 100%;
+      }
+      
+      .clear {
+        clear: both;
+      }
+      
+      .result-item {
+        padding-top: 10px;
+      }
+      
+      /* TABS */
+      /* Style the list */
+      ul.tab {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          border-bottom: 1px solid #ddd;
+          width: 100%;
+      }
+      
+      /* Float the list items side by side */
+      ul.tab li {
+          float: left;
+          width: 25%;
+          text-align: center;
+      }
+      
+      /* Style the links inside the list items */
+      ul.tab li a {
+          display: inline-block;
+          color: black;
+          text-align: center;
+          padding: 5px;
+          margin-right: 2px;
+          margin-left: 2px;
+          text-decoration: none;
+          transition: 0.3s;
+          border-bottom: 4px solid transparent;
+      }
+      
+      /* Change background color of links on hover */
+      ul.tab li a:hover {
+          border-bottom: 4px solid #646464;
+      }
+      
+      /* Create an active/current tablink class */
+      ul.tab li a:focus, .active {
+          color: #222;
+          font-weight: bold;
+          border-bottom: 4px solid #4285f4!important;
+      }
+      
+      /* Style the tab content */
+      .tabcontent {
+          display: none;
+          padding: 6px 12px;
+          border-top: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+    
+      <div class="tab-container">
+        <ul class="tab">
+          <li><a class="tablinks" onclick="openTab(event, 'instructions')">Welcome</a></li>
+          <li><a class="tablinks" onclick="openTab(event, 'uRank')">Writing</a></li>
+          <!-- <li><a class="tablinks" onclick="openTab(event, 'uRank')">uRank</a></li> -->
+          <!-- <li><a class="tablinks" onclick="openTab(event, 'Wikipedia')">Wikipedia</a></li> -->
+          <li><a class="tablinks" onclick="openTab(event, 'DocInfo')">Activity</a></li>
+        </ul>
+      </div>
+      
+    
+      <div id="DocInfo" class="block tabcontent" id="document-stats">
+        <div class="result-header">Document Info</div>
+        <p>Cursor/Selection:&nbsp;<span id="cursor-position"></span></p>
+        <p>Text length:&nbsp;<span id="document-length"></span></p>
+        <p>Window active:&nbsp;<span id="document-hidden"></span></p>
+        
+        <form>
+          <button class="blue" id="run-activity-vis">Visualise activity</button>
+        </form>
+        <!--<svg id="chart" />-->
+      </div>
+      
+      <div id="instructions" class="block tabcontent">
+        <div class="result-header">Writing Researcher</div>
+        <p>
+        Do you find writing easy? Do you always know how to structure your text and which words to use in which context? You've probably encountered situation where you struggled with at least one of these aspects. This is why we want to have a closer look at how people compose texts in order to find ways to support them in their task.
+        </p>
+      </div>
+      
+      <div id="writing" class="block tabcontent">
+        
+        <p>Keywords:&nbsp;<span id="extracted-keywords" /></p>
+        
+      </div>
+      
+       
+      <div id="uRank" class="block tabcontent"> 
+        <div class="block" id="button-urank">
+          <button class="blue" id="run-urank">Explore using uRank</button>
+        </div>
+      
+        <div class="block clear">
+         <div class="result-header" id="urank-result-header"></div>
+           <p>Keywords:&nbsp;<span id="urank-keywords" /></p>
+         <div id="urank-result" class="accordion"></div>
+        </div>
+      </div>
+      
+      <div id="Wikipedia" class="block tabcontent">
+        <form class="clear">
+          <p>
+            Enter text in the search box below or select a word in the document, then hit the search button.
+          </p>
+          <div class="block">
+            <input class="width-100" id="lookup-text" rows="1" />
+          </div>
+          <div class="block" id="button-bar">
+            <button class="blue" id="run-lookup">Look up</button>
+          </div>
+        </form>
+      
+        <div class="block clear">
+         <div class="result-header" id="result-header"></div>
+         <p id="result"></p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    
+    <script>
+      // tabs
+      // http://www.w3schools.com/howto/howto_js_tabs.asp
+        
+      function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+     
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+     
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+     
+        // Show the current tab, and add an "active" class to the link that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    
+    </script>
+    
+    <script>
+      $( function() {
+        $( "#accordion" ).accordion({
+          collapsible: true
+        });
+      } );
+    </script>
+    
+    <script>
+      // Prevent forms from submitting.
+      function preventFormSubmit() {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].addEventListener('submit', function(event) {
+            event.preventDefault();
+          });
+        }
+      }
+      window.addEventListener('load', preventFormSubmit);
+    </script>
+    
+    <script>
+      // Set the name of the hidden property and the change event for visibility
+      var hidden; 
+      if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+        hidden = "hidden";
+      } else if (typeof document.mozHidden !== "undefined") {
+        hidden = "mozHidden";
+      } else if (typeof document.msHidden !== "undefined") {
+        hidden = "msHidden";
+      } else if (typeof document.webkitHidden !== "undefined") {
+        hidden = "webkitHidden";
+      }
+    
+    
+      // update interval
+      var updateInterval = 10000;
+    
+      // ##### wikipedia look up #####
+      $(function() {
+        $('#run-lookup').click(runLookup);
+      });
+      
+      function onSuccess(content) {
+        var div = document.getElementById('result');
+        div.innerHTML = content.content;
+        //var keyword = $('#lookup-text').val();
+        document.getElementById('result-header').innerHTML = content.title;
+      }
+      
+      function onFailure(content) {
+        document.getElementById('result-header').innerHTML = "Error";
+      }
+      
+      function runLookup() {
+        document.getElementById('result-header').innerHTML = "Loading...";
+        var keyword = $('#lookup-text').val();
+        google.script.run
+          .withSuccessHandler(onSuccess)
+          .withFailureHandler(onFailure)
+          .identifyAndLookUp(keyword);
+      
+      }
+      
+      // ##### uRank #####
+      $(function() {
+        $('#run-urank').click(runURank);
+      });
+      
+      function onURankSuccess(content) {
+        document.getElementById('urank-result-header').innerHTML = "Results";
+        
+        document.getElementById('urank-keywords')
+          .innerHTML = content.keywords.join(", ");
+        
+        document.getElementById('urank-result')
+          .innerHTML = content.ranking;
+      }
+      
+      function onURankFailure(content) {
+        document.getElementById('urank-result-header').innerHTML = "Error";
+      }
+      
+      function runURank() {
+        document.getElementById('urank-result-header').innerHTML = "Loading...";
+        google.script.run
+          .withSuccessHandler(onURankSuccess)
+          .withFailureHandler(onURankFailure)
+          .uRankFromParagraph();
+      }
+      
+                
+        function repeatedURank() {
+          google.script.run
+            .withSuccessHandler(onURankSuccess)
+            .withFailureHandler(onURankFailure)
+            .uRankFromParagraph();
+        }
+        
+        //var uRankInterval = setInterval(repeatedURank, updateInterval);
+      
+      // ##### Document Statistics #####
+      // activity visualisation
+      $(function() {
+        $('#run-activity-vis').click(runShowActivity);
+      });
+      
+      function runShowActivity() {
+        google.script.run
+          .showActivity(!document[hidden]);
+      }
+
+      
+      // current doc statistics
+      var documentStatistics = [];
+          
+      function showDocumentStatistics(latestStats) {
+        if (latestStats[0].cursorOffset) {
+          document.getElementById('cursor-position')
+          .innerHTML = latestStats[0].cursorOffset;
+        }
+        else {
+          document.getElementById('cursor-position')
+          .innerHTML = latestStats[0].selection;
+        }
+        
+        document.getElementById('document-length')
+          .innerHTML = latestStats[0].length;
+        
+        document.getElementById('document-hidden')
+          .innerHTML = latestStats[0].visible;
+      }
+
+      function repeatedAction() {
+        google.script.run
+          .withSuccessHandler(showDocumentStatistics)
+          .getDocumentStatistics(!document[hidden]);
+      }
+      
+      // first run
+      google.script.run
+          .withSuccessHandler(showDocumentStatistics)
+          .getDocumentStatistics(!document[hidden]);
+      
+      var myVar = setInterval(repeatedAction, 2000);
+      
+    </script>
+
+  </body>
+</html>
+
+
