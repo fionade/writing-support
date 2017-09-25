@@ -7,7 +7,7 @@
  * and not all of the user's files. The authorization request message
  * presented to users will reflect this limited scope.
  */
- 
+
 /**
  * Creates a menu entry in the Google Docs UI when the document is opened.
  * This method is only used by the regular add-on, and is never called by

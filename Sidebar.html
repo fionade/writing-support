@@ -4,196 +4,446 @@
     <base target="_top">
     <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
     <!-- The CSS package above applies Google styling to buttons and other elements. -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
       h2 {
-        font-size : 100%;
+        font-size : 14px;
         font-weight: bold;
       }
-      
+
+      h3 {
+        font-size : 13px;
+      }
+
+      h4 {
+        font-size: 12px;
+      }
+
       p {
         font-size: 95%;
       }
-    
-      .result-header {
-        font-weight: bold;
-      }
-      
+
       .width-100 {
         width: 100%;
       }
-      
+
       .clear {
         clear: both;
       }
-      
+
+      .sidebar {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+      }
+
+      .div-with-side-margin {
+        margin-right: 12px;
+        margin-left: 12px;
+      }
+
+      /***** PROCESS BUTTONS *****/
+
+      .activated, .activated:hover {
+        color: #357ae8;
+      }
+
+      .process > * {
+        vertical-align: middle;
+      }
+
+      .space-above {
+        margin-top: 30px;
+      }
+
+      .process-title {
+        padding: 12px;
+        background-color: rgba(0, 0, 0, 0.1);
+        box-shadow: inset 1px 1px 1px rgba(0,0,0,.05);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .process-button {
+        width: 24%;
+      }
+
+      /***** TOOLS *****/
+      .tool-title {
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      /***** TOOLTIPS *****/
+      .tooltip {
+        position: relative;
+        margin-left: 5px;
+      }
+
+      .tooltip .tooltiptext {
+        background-color: white;
+        visibility: hidden;
+
+        border: 1px solid #646464;
+        border-radius: 3px;
+        padding: 5px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        width: 120px;
+        top: 20px;
+        left: 50%;
+        margin-left: -30px; /* Use half of the width (120/2 = 60), to center the tooltip */
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }
+
+      /***** TOOLS *****/
+      .tool-header {
+        margin-right: 12px;
+        margin-left: 12px;
+      }
+
+      /***** SEARCH RESULTS *****/
       .result-item {
-        padding-top: 10px;
+        padding: 5px 12px;
+        position: relative;
       }
-      
-      /* TABS */
-      /* Style the list */
-      ul.tab {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          border-bottom: 1px solid #ddd;
-          width: 100%;
+
+      .result-item:hover {
+        background-color: rgba(0,0,0,.10);
+        box-shadow: inset 1px 1px 1px rgba(0,0,0,.05);
       }
-      
-      /* Float the list items side by side */
-      ul.tab li {
-          float: left;
-          width: 25%;
-          text-align: center;
+
+      .abstract-hidden-part {
+        display: none;
       }
-      
-      /* Style the links inside the list items */
-      ul.tab li a {
-          display: inline-block;
-          color: black;
-          text-align: center;
-          padding: 5px;
-          margin-right: 2px;
-          margin-left: 2px;
-          text-decoration: none;
-          transition: 0.3s;
-          border-bottom: 4px solid transparent;
+
+      .result-item:hover .abstract-hidden-part {
+        display: inline;
       }
-      
-      /* Change background color of links on hover */
-      ul.tab li a:hover {
-          border-bottom: 4px solid #646464;
+
+      .result-item > p {
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
-      
-      /* Create an active/current tablink class */
-      ul.tab li a:focus, .active {
-          color: #222;
-          font-weight: bold;
-          border-bottom: 4px solid #4285f4!important;
+
+      h3.result-header {
+        font-weight: bold;
+        font-size: 13px;
+        margin: 0px;
+        margin-right: 28px;
+        line-height: 20px;
       }
-      
-      /* Style the tab content */
-      .tabcontent {
-          display: none;
-          padding: 6px 12px;
-          border-top: none;
+
+      p.authors {
+        font-style: italic;
+        font-size: 12px;
+        margin: 0px;
+      }
+
+      p.abstract {
+        font-size: 12px;
+        margin: 0px;
+      }
+
+      span.keyword-highlight {
+        color: #357ae8;
+      }
+
+      .bookmark {
+        position: absolute;
+        top: 5px;
+        right : 12px;
+        text-align: right;
+        width: 20px;
+      }
+
+      /*** Reviewing tool ***/
+      #reviewing-keywords {
+        line-height: 2.5em;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+
+      .reviewing-keyword {
+         padding: 5px;
+         margin: 4px;
+         border-radius: 5px;
+      }
+
+      .section-header {
+        font-weight: bold;
+        font-size: 13px;
+        margin: 20px 12px 2px 12px;
+        line-height: 20px;
+      }
+
+      td.frequency {
+        padding: 10px;
+      }
+
+      td.right {
+        text-align: right;
+      }
+
+      .frequency-table {
+        min-width: 50%;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      /***** PLANNING TOOL *****/
+
+      #topic-form-container {
+        position: relative;
+        margin-top: 12px;
+      }
+
+      .topic-container {
+        position: relative;
+      }
+
+      .paragraph-bar {
+        fill : #357ae8;
+      }
+
+      .planning-topic {
+        padding: 5px;
+        margin: 4px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      .remove-topic {
+        vertical-align: text-bottom;
+        font-size: 16px;
+        margin-left: 3px;
+      }
+
+      .content-padding {
+        padding: 0px 12px;
+      }
+
+      .plus {
+        position: absolute;
+        bottom: 2px;
+        right : 12px;
+        text-align: right;
+        width: 20px;
+      }
+
+      textarea {
+        width: 95%;
+      }
+
+      .new-section {
+        width: 95%;
+        margin-bottom: 12px !important;
+      }
+
+      .topic-section {
+        margin-bottom: 20px;
+      }
+
+      .topic-selection {
+        margin-bottom: 12px;
+      }
+
+      /***** LOADER *****/
+      .loader {
+        width: 16px;
+        height: 16px;
+        z-index: 1;
+        margin-left: 40px;
+        border: 4px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 4px solid #357ae8;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        margin: auto;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+
+      /* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 }
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom {
+        from { bottom:-100px; opacity:0 }
+        to { bottom:0; opacity:1 }
       }
 
     </style>
   </head>
   <body>
     <div class="sidebar">
-    
-      <div class="tab-container">
-        <ul class="tab">
-          <li><a class="tablinks" onclick="openTab(event, 'instructions')">Welcome</a></li>
-          <li><a class="tablinks" onclick="openTab(event, 'uRank')">Writing</a></li>
-          <!-- <li><a class="tablinks" onclick="openTab(event, 'uRank')">uRank</a></li> -->
-          <!-- <li><a class="tablinks" onclick="openTab(event, 'Wikipedia')">Wikipedia</a></li> -->
-          <li><a class="tablinks" onclick="openTab(event, 'DocInfo')">Activity</a></li>
-        </ul>
-      </div>
-      
-    
-      <div id="DocInfo" class="block tabcontent" id="document-stats">
-        <div class="result-header">Document Info</div>
-        <p>Cursor/Selection:&nbsp;<span id="cursor-position"></span></p>
-        <p>Text length:&nbsp;<span id="document-length"></span></p>
-        <p>Window active:&nbsp;<span id="document-hidden"></span></p>
-        
-        <form>
-          <button class="blue" id="run-activity-vis">Visualise activity</button>
-        </form>
-        <!--<svg id="chart" />-->
-      </div>
-      
-      <div id="instructions" class="block tabcontent">
-        <div class="result-header">Writing Researcher</div>
-        <p>
-        Do you find writing easy? Do you always know how to structure your text and which words to use in which context? You've probably encountered situation where you struggled with at least one of these aspects. This is why we want to have a closer look at how people compose texts in order to find ways to support them in their task.
-        </p>
-      </div>
-      
-      <div id="writing" class="block tabcontent">
-        
-        <p>Keywords:&nbsp;<span id="extracted-keywords" /></p>
-        
-      </div>
-      
-       
-      <div id="uRank" class="block tabcontent"> 
-        <div class="block" id="button-urank">
-          <button class="blue" id="run-urank">Explore using uRank</button>
-        </div>
-      
-        <div class="block clear">
-         <div class="result-header" id="urank-result-header"></div>
-           <p>Keywords:&nbsp;<span id="urank-keywords" /></p>
-         <div id="urank-result" class="accordion"></div>
-        </div>
-      </div>
-      
-      <div id="Wikipedia" class="block tabcontent">
-        <form class="clear">
-          <p>
-            Enter text in the search box below or select a word in the document, then hit the search button.
-          </p>
-          <div class="block">
-            <input class="width-100" id="lookup-text" rows="1" />
+
+      <div id="writing" class="block">
+
+        <!-- process buttons with tooltips for process description -->
+        <div class="process">
+          <div class="process process-title">
+            <span class="process-button  material-icons" id="searching" onclick="showTools('searching')" title="Searching">search</span>
+            <span class="process-button  material-icons" id="planning" onclick="showTools('planning')" title="Planning">directions</span>
+            <span class="process-button  material-icons" id="translating" onclick="showTools('translating')" title="Typing">edit</span>
+            <span class="process-button  material-icons" id="reviewing" onclick="showTools('reviewing')" title="Reviewing">visibility</span>
           </div>
-          <div class="block" id="button-bar">
-            <button class="blue" id="run-lookup">Look up</button>
+
+          <div class="tool" id="searching-tool">
+            <h2 class="tool-title">Searching</h2>
+            <h3 class="section-header">Related Sources</h3>
+            <div class="loader" id="search-loader"></div>
+            <div id="keywords-header" class="tool-header">Results for: <span id="keywords"></span></div>
+            <div id="recommended-content"></div>
+            <!--<ul>
+              <li>Get keywords: for whole document, a paragraph</li>
+              <li>Get recommendations for the most important keywords</li>
+            </ul>-->
+            <h3 class="section-header">Bookmarked Sources</h3>
+            <div id="saved-content"></div>
           </div>
-        </form>
-      
-        <div class="block clear">
-         <div class="result-header" id="result-header"></div>
-         <p id="result"></p>
+        </div>
+        <div class="process">
+          <div class="tool" id="planning-tool">
+            <h2 class="tool-title">Planning</h2>
+            <h3 class="section-header">Key Facts</h3>
+            <div id="planning-questions" class="content-padding">
+              <form>
+                <p>What are your key topics?</p>
+                <div id="topic-selection">
+                </div>
+                <div id="topic-form-container">
+                  <input type="text" placeholder="Topic" id="new-topic" />
+                  <div class='plus material-icons' title='add another topic' id='add-topics'>add</div>
+                </div>
+                <p>What is your target audience?</p>
+                <textarea id="target-audience"></textarea>
+                <p>What is your goal?</p>
+                <textarea id="goal"></textarea>
+              </form>
+            </div>
+            <h3 class="section-header">Structure</h3>
+            <div class="content-padding">
+              <p>Use the fields below to assign topics to parts of your text</p>
+              <h4>Introduction</h4>
+              <div class="topic-selection" id="topic-selection-introduction">
+              </div>
+              <div class="topic-container" id="topic-introduction-container">
+                <input type="text" placeholder="Topic" class="new-topic" id="new-topic-introduction" />
+                <div class='plus material-icons' title='add another topic' class='add-topics' id='add-topics-introduction'>add</div>
+              </div>
+
+              <h4>Body</h4>
+              <div id="body-topics">
+                <div class="topic-section" id="body-topic-section">
+                  <input type="text" placeholder="Section Title" class="new-section" id="new-section-1" />
+                  <div class="topic-selection" id="topic-selection-section-1">
+                  </div>
+                  <div class="topic-container" id="topic-body-container-1">
+                    <input type="text" placeholder="Topic" class="new-topic" id="new-topic-section-1" />
+                    <div class='plus material-icons' title='add another topic' class='add-topics' id='add-topics-section-1'>add</div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>Conclusion</h4>
+              <div class="topic-selection" id="topic-selection-conclusion">
+              </div>
+              <div class="topic-container" id="topic-conclusion-container">
+                <input type="text" placeholder="Topic" class="new-topic" id="new-topic-conclusion" />
+                <div class='plus material-icons' title='add another topic' class='add-topics' id='add-topics-conclusion'>add</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="tool" id="translating-tool">
+            <h2 class="tool-title">Typing</h2>
+            <div class="tool-section" id="translating-context">
+              <h3 class="section-header">In Context</h3>
+              <div class="loader" id="context-loader"></div>
+              <div id="keyword-in-context"></div>
+            </div>
+            <div class="tool-section" id="translating-synonyms">
+              <h3 class="section-header">Synonyms</h3>
+              <div class="loader" id="synonyms-loader"></div>
+              <ul id="typing-synonyms"></ul>
+            </div>
+            <div class="tool-section" id="translating-connector-alternatives">
+              <h3 class="section-header">Alternatives</h3>
+              <div class="loader" id="alternatives-loader"></div>
+              <ul id="typing-alternatives"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="tool" id="reviewing-tool">
+            <h2 class="tool-title">Reviewing</h2>
+
+            <h3 class="section-header">Key Concepts</h3>
+            <p id="reviewing-keywords-explanation" class="tool-header">We identified these main concepts in your text. Do they match what you were aiming to write about?</p>
+            <div id="reviewing-keywords"></div>
+
+            <!--<h3 class="section-header">Character count</h3>
+            <div id="word-count" class="div-with-side-margin"></div>-->
+
+            <h3 class="section-header">Flesch-Kincaid Grade Level</h3>
+            <div class="loader" id="kincaid-loader"></div>
+            <div id="flesch-kincaid" class="div-with-side-margin"></div>
+
+            <h3 class="section-header">Frequent Connectors and Alternatives</h3>
+            <div class="loader" id="connectors-loader"></div>
+            <ul id="frequent-conjunctions"></ul>
+            <!--<table id="frequent-conjunctions" class="frequency-table"></table>-->
+
+            <h3 class="section-header">Most Frequent Words and Alternatives</h3>
+            <div class="loader" id="frequent-loader"></div>
+            <ul id="frequent-words"></ul>
+            <!--<table id="frequent-words" class="frequency-table"></table>-->
+
+            <h3 class="section-header">Document Structure</h3>
+            <svg id="paragraph-vis" />
+            <div class="content-padding">
+              <p id="structure-suggestions"></p>
+            </div>
+          </div>
         </div>
       </div>
-      
+
     </div>
-    
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    
-    <script>
-      // tabs
-      // http://www.w3schools.com/howto/howto_js_tabs.asp
-        
-      function openTab(evt, tabName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-     
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-     
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-     
-        // Show the current tab, and add an "active" class to the link that opened the tab
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-      }
-    
-    </script>
-    
-    <script>
-      $( function() {
-        $( "#accordion" ).accordion({
-          collapsible: true
-        });
-      } );
-    </script>
-    
+
     <script>
       // Prevent forms from submitting.
       function preventFormSubmit() {
@@ -206,135 +456,577 @@
       }
       window.addEventListener('load', preventFormSubmit);
     </script>
-    
+
     <script>
-      // Set the name of the hidden property and the change event for visibility
-      var hidden; 
-      if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
-        hidden = "hidden";
-      } else if (typeof document.mozHidden !== "undefined") {
-        hidden = "mozHidden";
-      } else if (typeof document.msHidden !== "undefined") {
-        hidden = "msHidden";
-      } else if (typeof document.webkitHidden !== "undefined") {
-        hidden = "webkitHidden";
+
+      // expand and collapse the processes' tools
+      function showTools(processName) {
+        $(".process-button").not("#" + processName).removeClass("activated");
+        $(".process-button#" + processName).addClass("activated");
+
+        var inactiveElements = $(".tool").not("#" + processName + "-tool");
+        inactiveElements.hide(200);
+        inactiveElements.removeClass("active-process");
+
+        var selectedElement = $("#" + processName + "-tool");
+        if (!selectedElement.is(":visible")) {
+          selectedElement.show(200);
+        }
+        if (selectedElement.is(":visible") && !selectedElement.hasClass("active-process")) {
+          selectedElement.addClass("active-process");
+
+          if (interval) {
+            clearInterval(interval);
+          }
+
+          // set interval
+          switch (processName) {
+            case "planning":
+              break;
+            case "translating":
+              interval = setInterval(triggerTranslatingUpdate, 1000);
+              getExamplePhrases(true);
+              break;
+            case "reviewing":
+              interval = setInterval(triggerReviewingUpdate, 2000);
+              extractKeyConcepts(true);
+              break;
+            case "searching":
+              extractKeywords(true);
+              interval = setInterval(triggerUpdate, 3000);
+              // retrieve cached bookmarks
+              google.script.run
+                .withSuccessHandler(updateBookmarkList)
+                .getBookmarks();
+              break;
+            default:
+              break;
+          }
+        }
       }
-    
-    
-      // update interval
-      var updateInterval = 10000;
-    
-      // ##### wikipedia look up #####
-      $(function() {
-        $('#run-lookup').click(runLookup);
-      });
-      
-      function onSuccess(content) {
-        var div = document.getElementById('result');
-        div.innerHTML = content.content;
-        //var keyword = $('#lookup-text').val();
-        document.getElementById('result-header').innerHTML = content.title;
-      }
-      
-      function onFailure(content) {
-        document.getElementById('result-header').innerHTML = "Error";
-      }
-      
-      function runLookup() {
-        document.getElementById('result-header').innerHTML = "Loading...";
-        var keyword = $('#lookup-text').val();
+
+      /***** SEARCHING TOOL *****/
+      // extract keywords only or whole research process at once?
+      // start with both at once only
+
+      function triggerUpdate() {
         google.script.run
-          .withSuccessHandler(onSuccess)
-          .withFailureHandler(onFailure)
-          .identifyAndLookUp(keyword);
-      
+          .withSuccessHandler(extractKeywords)
+          .checkIfCurrentTextChanged();
       }
-      
-      // ##### uRank #####
-      $(function() {
-        $('#run-urank').click(runURank);
-      });
-      
-      function onURankSuccess(content) {
+
+      function extractKeywords(textChanged) {
+        if (textChanged) {
+          $('#keywords-header').hide(0);
+          $("#search-loader").show(0);
+          google.script.run
+            .withSuccessHandler(onDocumentRankingObtained)
+            //.withSuccessHandler(onURankObtained)
+            .withFailureHandler(onURankFailure)
+            //.uRankFromParagraph();
+            .getRelatedContent();
+          console.log("started search");
+        }
+      }
+
+      function updateBookmarkList(bookmarkList) {
+        var savedContent = $("#saved-content");
+        savedContent.empty();
+
+        if (bookmarkList) {
+          Object.keys(bookmarkList).forEach(function(d) {
+            if (bookmarkList.hasOwnProperty(d)) {
+              savedContent.append(bookmarkList[d]);
+            }
+          });
+
+          $("#saved-content .bookmark").click(function() {
+            console.log("click");
+            $("#" + $(this).attr("id")).text("star_border");
+            google.script.run
+              .removeBookmark($(this).attr("id"));
+
+            $("#saved-content #" + $(this).attr("id")).parent().remove();
+          });
+        }
+
+      }
+
+      function onDocumentRankingObtained(result) {
+        $('#search-loader').hide(0);
+        $('#keywords-header').show(0);
+
+        console.log("finished search: " + result.keywords.join(", "));
+        $("#keywords").text(result.keywords.join(", "));
+
+        $("#recommended-content").html(result.ranking);
+
+        $(".bookmark").click(function() {
+          if ($(this).text() == "star") {
+            $("#" + $(this).attr("id")).text("star_border");
+            google.script.run
+              .removeBookmark($(this).attr("id"));
+
+            $("#saved-content #" + $(this).attr("id")).parent().remove();
+          }
+          else {
+            $(this).text("star");
+            var toCopy = $(this).parent().clone();
+            $("#saved-content").append(toCopy);
+
+            // also make sure that the copy of the bookmarked item has click functionality
+            $("#saved-content .bookmark").click(function() {
+              // change the star symbol of the item in the result list
+              $("#" + $(this).attr("id")).text("star_border");
+              $("#saved-content #" + $(this).attr("id")).parent().remove();
+              google.script.run
+                .removeBookmark($(this).attr("id"));
+            });
+
+            google.script.run
+              .saveBookmarks($(this).attr("id"), toCopy[0].outerHTML);
+          }
+
+        });
+      }
+
+      function onURankObtained(result) {
+        $('#search-loader').hide(0);
+        $('#keywords-header').show(0);
+        console.log("finished search: " + result.keywords.join(", "));
+        $("#keywords").text(result.keywords.join(", "));
+
+        $("#recommended-content").html(result.ranking);
+
+
+        /*
         document.getElementById('urank-result-header').innerHTML = "Results";
-        
+
         document.getElementById('urank-keywords')
           .innerHTML = content.keywords.join(", ");
-        
+
         document.getElementById('urank-result')
-          .innerHTML = content.ranking;
-      }
-      
-      function onURankFailure(content) {
-        document.getElementById('urank-result-header').innerHTML = "Error";
-      }
-      
-      function runURank() {
-        document.getElementById('urank-result-header').innerHTML = "Loading...";
-        google.script.run
-          .withSuccessHandler(onURankSuccess)
-          .withFailureHandler(onURankFailure)
-          .uRankFromParagraph();
-      }
-      
-                
-        function repeatedURank() {
-          google.script.run
-            .withSuccessHandler(onURankSuccess)
-            .withFailureHandler(onURankFailure)
-            .uRankFromParagraph();
-        }
-        
-        //var uRankInterval = setInterval(repeatedURank, updateInterval);
-      
-      // ##### Document Statistics #####
-      // activity visualisation
-      $(function() {
-        $('#run-activity-vis').click(runShowActivity);
-      });
-      
-      function runShowActivity() {
-        google.script.run
-          .showActivity(!document[hidden]);
+          .innerHTML = content.ranking;*/
       }
 
-      
-      // current doc statistics
-      var documentStatistics = [];
-          
-      function showDocumentStatistics(latestStats) {
-        if (latestStats[0].cursorOffset) {
-          document.getElementById('cursor-position')
-          .innerHTML = latestStats[0].cursorOffset;
+      function onURankFailure(error) {
+        // TODO
+        $('#keywords-header').show(0);
+        $('#search-loader').hide(0);
+        console.log(error);
+        $("#keywords").innerHTML = "Error";
+      }
+
+      /***** PLANNING TOOL *****/
+
+      var topicCounter = 0;
+
+      $("#add-topics").click(function() {
+        addTopic("#new-topic", "#topic-selection");
+      });
+
+      $("#new-topic").keyup(function(event) {
+        if (event.which == 13) {
+          addTopic("#new-topic", "#topic-selection");
+        }
+      });
+
+      $("#add-topics-introduction").click(function() {
+        addTopic("#new-topic-introduction", "#topic-selection-introduction");
+      });
+
+      $("#new-topic-introduction").keyup(function(event) {
+        if (event.which == 13) {
+          addTopic("#new-topic-introduction", "#topic-selection-introduction");
+        }
+      });
+
+      $("#add-topics-conclusion").click(function() {
+        addTopic("#new-topic-conclusion", "#topic-selection-conclusion");
+      });
+
+      $("#new-topic-conclusion").keyup(function(event) {
+        if (event.which == 13) {
+          addTopic("#new-topic-conclusion", "#topic-selection-conclusion");
+        }
+      });
+
+      function addTopic(newTopic, topicSelection) {
+        var colours = ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#ccebc5','#ffffb3'];
+        var topic = $(newTopic).val();
+        $(newTopic).val("");
+        var element = "<div class='planning-topic' style='background-color: " + colours[++topicCounter % colours.length] + ";'>" + topic;
+        element += "<span class='material-icons remove-topic'>clear</span></div>";
+        $(topicSelection).append(element);
+
+        google.script.run.addTopicToCache(topic);
+
+        $(".remove-topic").click(function() {
+          // quick fix: TODO still find better jQuery code
+          var topic = $(this).parent().text().replace("clear", "");
+          console.log(topic);
+          $(this).parent().remove();
+          // get topic
+
+          google.script.run.removeTopicFromCache(topic);
+        });
+      }
+
+      $(".new-section").change(function() {
+        addSection(this.id);
+      });
+
+      $("#new-topic-section-1").keyup(function(event) {
+        if (event.which == 13) {
+          addTopic("#new-topic-section-1", "#topic-selection-section-1");
+        }
+      });
+
+      $("#add-topics-section-1").click(function() {
+        addTopic("#new-topic-section-1", "#topic-selection-section-1");
+      });
+
+      function addSection(id) {
+        var sectionCounter = id.replace("new-section-", "");
+        if (!$('#new-section-' + ++sectionCounter).length) {
+          $("#body-topics").append('<div class="topic-section">'
+            + '<input type="text" placeholder="Section Title" class="new-section" id="new-section-' + sectionCounter + '" />'
+            + '<div class="topic-selection" id="topic-selection-section-' + sectionCounter + '"></div>'
+            + '<div class="topic-container" id="topic-body-container-' + sectionCounter + '1">'
+            + '<input type="text" placeholder="Topic" class="new-topic" id="new-topic-section-' + sectionCounter + '" />'
+            + '<div class="plus material-icons" title="add another topic" class="add-topics" id="add-topics-section-' + sectionCounter + '">add</div>'
+            + '</div></div>');
+
+          $(".new-section").change(function() {
+            addSection(this.id);
+          });
+
+          $("#new-topic-section-" + sectionCounter).keyup(function(event) {
+            if (event.which == 13) {
+              var id = this.id.replace("new-topic-section-", "");
+              addTopic("#new-topic-section-" + id, "#topic-selection-section-" + id);
+            }
+          });
+
+          $("#add-topics-section-" + sectionCounter).click(function() {
+            var id = this.id.replace("add-topics-section-", "");
+            addTopic("#new-topic-section-" + id, "#topic-selection-section-" + id);
+          });
+        }
+      }
+
+
+      /***** TRANSLATING TOOL *****/
+      function triggerTranslatingUpdate() {
+        google.script.run
+          .withSuccessHandler(getExamplePhrases)
+          .checkIfCursorChanged();
+      }
+
+      function getExamplePhrases(cursorChanged) {
+        if (cursorChanged) {
+          $('#context-loader').show(0);
+          $('#synonyms-loader').show(0);
+          $('#alternatives-loader').show(0);
+          google.script.run
+            .withSuccessHandler(onExamplePhrasesObtained)
+            .withFailureHandler(onExamplePhrasesFailure)
+            .getTermsInContext();
+          console.log("started context search");
+        }
+      }
+
+      function onExamplePhrasesObtained(result) {
+        $('#context-loader').hide(0);
+        $('#synonyms-loader').hide(0);
+        $('#alternatives-loader').hide(0);
+
+        if(result != "") {
+          if (result[0] == "keyword") {
+            // context examples
+            $('#keyword-in-context').html(result[1]);
+
+            // the synonyms
+            if (result[1]) {
+              var container = $("#typing-synonyms");
+              container.empty();
+              result[2].forEach(function(d) {
+                container.append("<li>" + d + "</li>");
+              });
+            }
+
+            $("#translating-connector-alternatives").hide(0);
+            $("#translating-context").show(0);
+            $("#translating-synonyms").show(0);
+
+            $("#translating-context h3").text('"' + result[3] + '" in Context');
+            $("#translating-synonyms h3").text('Synonyms for "' + result[3] + '"');
+          }
+          else if (result[0] == "connector") {
+            var container = $("#typing-alternatives");
+            container.empty();
+            result[1].forEach(function(d) {
+            container.append("<li>" + d + "</li>");
+            });
+
+            $("#translating-connector-alternatives").show(0);
+            $("#translating-context").hide(0);
+            $("#translating-synonyms").hide(0);
+
+            $("#translating-connector-alternatives h3").text('Alternatives for "' + result[2] + '"');
+          }
+
+        }
+      }
+
+      function onExamplePhrasesFailure(error) {
+        console.log(error);
+        $('#context-loader').hide(0);
+        $('#synonyms-loader').hide(0);
+        $('#alternatives-loader').hide(0);
+        $('#keyword-in-context').text("Error");
+      }
+
+      /***** REVISION TOOL *****/
+
+      function triggerReviewingUpdate() {
+        google.script.run
+          .withSuccessHandler(extractKeyConcepts)
+          .checkIfTextChanged();
+      }
+
+      function onParagraphStructureSuccess(paragraphs) {
+        var paragraphLevels = paragraphs.paragraphs;
+        var labels = paragraphs.labels;
+
+        var svg = d3.select("#paragraph-vis");
+        // empty any previous visualisation
+        svg.selectAll("*").remove();
+
+        var margin = {
+          "left" : 50,
+          "right" : 50,
+          "bottom" : 70,
+          "top" : 10
+        };
+
+        var width = 200;
+        var height = 100;
+
+        // replace second domain value with text length
+        if (paragraphLevels.length > 1) {
+          var y = d3.scaleLinear().domain([0, paragraphLevels[0][0].endOffset - paragraphLevels[0][0].startOffset]).range([0, height]);
         }
         else {
-          document.getElementById('cursor-position')
-          .innerHTML = latestStats[0].selection;
+          var y = d3.scaleLinear().domain([0, paragraphLevels[0][paragraphLevels[0].length - 1].endOffset - paragraphLevels[0][0].startOffset]).range([0, height]);
         }
-        
-        document.getElementById('document-length')
-          .innerHTML = latestStats[0].length;
-        
-        document.getElementById('document-hidden')
-          .innerHTML = latestStats[0].visible;
+
+        var x = d3.scaleLinear().domain([0, paragraphLevels.length]).range([0, width]);
+
+        svg.attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+        // go through the tree recursively
+        // for each node, create a rectangle at its level, upper limit is the offset, the height the text length
+
+        var unused = [];
+        var oneSubsection = [];
+
+        for (var i = 0; i < paragraphLevels.length; i++) {
+
+          if (paragraphLevels[i].length == 0) {
+            unused.push(labels[i]);
+          }
+          if (i > 0 && paragraphLevels[i].length == 1) {
+            oneSubsection.push(labels[i]);
+          }
+
+          var xPos = x(i);
+          g.selectAll(".bar")
+           .data(paragraphLevels[i])
+           .enter().append("rect")
+             .attr("class", "paragraph-bar")
+             .attr("x", xPos)
+             .attr("y", function(d) { return y(d.startOffset) + 1;} )
+             .attr("width", 30)
+             .attr("height", function(d) { return Math.max(y(d.endOffset - d.startOffset) - 2, 1);} );
+
+          g.append("text")
+           .attr("transform", "rotate(-90)")
+           .attr("y", xPos + 20)
+           .attr("x", -110)
+           .attr("class", "axis-tick")
+           .attr("text-anchor", "end")
+           .text(labels[i]);
+        }
+
+        $("#structure-suggestions").empty();
+        if (unused.length > 0) {
+          $("#structure-suggestions").text("You are not using " + unused.join(", ") + ".");
+        }
+        if (oneSubsection.length > 0) {
+          var previousText = $("#structure-suggestions").text();
+          $("#structure-suggestions").text(previousText + " There is only one section of level " + oneSubsection.join(", ") + ".");
+        }
       }
 
-      function repeatedAction() {
-        google.script.run
-          .withSuccessHandler(showDocumentStatistics)
-          .getDocumentStatistics(!document[hidden]);
+      function extractKeyConcepts(textChanged) {
+        if (textChanged) {
+          $('#kincaid-loader').show(0);
+          $('#connectors-loader').show(0);
+          $('#frequent-loader').show(0);
+
+          console.log("started keyword search");
+          google.script.run
+            .withSuccessHandler(onKeyConceptsObtained)
+            .withFailureHandler(onKeyConceptsError)
+            .getKeyConcepts();
+
+          google.script.run
+            .withSuccessHandler(onTextMetricsObtained)
+            .withFailureHandler(onTextMetricsFailure)
+            .getTextMetrics();
+
+          google.script.run
+            .withSuccessHandler(onFleschKincaidObtained)
+            .withFailureHandler(onTextMetricsFailure)
+            .getFleschKincaid();
+
+          google.script.run
+            .withSuccessHandler(onParagraphStructureSuccess)
+            //.withFailureHandler()
+            .getParagraphsPerLevel();
+        }
       }
-      
-      // first run
-      google.script.run
-          .withSuccessHandler(showDocumentStatistics)
-          .getDocumentStatistics(!document[hidden]);
-      
-      var myVar = setInterval(repeatedAction, 2000);
-      
+
+      function onFleschKincaidObtained(result) {
+        $('#kincaid-loader').hide(0);
+        if (result) {
+          $('#flesch-kincaid').text("An estimated " + result + " years of education are required to understand this text.");
+        }
+      }
+
+      function onKeyConceptsObtained(result) {
+        $('#kincaid-loader').hide(0);
+        $('#connectors-loader').hide(0);
+        $('#frequent-loader').hide(0);
+        // for each result, add a span with background colour and rounded edges
+        // size based on tf-idf?
+
+        // get the html element to append stuff to
+        var container = $('#reviewing-keywords');
+        $('#reviewing-keywords-explanation').show();
+        var colours = ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#ccebc5','#ffffb3'];
+        container.empty();
+
+        result.forEach(function(d, i) {
+          container.append("<span class='reviewing-keyword' id='concept-" + i + "' style='background-color: " + colours[i % colours.length] + ";'>" + d.term + "</span> ");
+        });
+
+        $('.reviewing-keyword')
+          .mouseenter(function() {
+            var index = $(this).attr('id').split("-")[1];
+            google.script.run
+              .highlightKeywords([result[index]], hexc($(this).css('background-color')));
+          })
+          .mouseleave(function() {
+            var index = $(this).attr('id').split("-")[1];;
+            google.script.run
+              .highlightKeywords([result[index]], "#ffffff");
+          });
+      }
+
+      function onKeyConceptsError(error) {
+        console.log(error);
+      }
+
+      function onTextMetricsObtained(result) {
+        if (result && result.fleschKincaidScore) {
+          $('#flesch-kincaid').text("An estimated " + result.fleschKincaidScore + " years of education are required to understand this text.");
+        }
+
+//        if (result && result.wordCount) {
+//          $('#word-count').text(result.wordCount);
+//        }
+
+        if (result && result.mostFrequentWords) {
+          var container = $('#frequent-words');
+          container.empty();
+          result.mostFrequentWords.forEach(function(d) {
+            if (d.synonyms) {
+              container.append("<li><span class='frequent-term'>" + d.term + "</span> (" + d.repetitions + "): " + d.synonyms.join(', ') + "</li>");
+            }
+            else {
+              container.append("<li><span class='frequent-term'>" + d.term + "</span> (" + d.repetitions + ")</li>");
+            }
+          });
+//          result.mostFrequentWords.forEach(function(d) {
+//            if (d.synonyms) {
+//              container.append("<tr><td class='frequency'><span class='frequent-term'>" + d.term + "</span></td><td class='frequency right'>" + d.repetitions + "<td>" + d.synonyms.join(', ') + "</td></tr>");
+//            }
+//            else {
+//              container.append("<tr><td class='frequency'><span class='frequent-term'>" + d.term + "</span></td><td class='frequency right'>" + d.repetitions + "<td></td></tr>");
+//            }
+//          });
+        }
+
+        if (result && result.frequentConjunctions) {
+          var container = $('#frequent-conjunctions');
+          container.empty();
+          result.frequentConjunctions.forEach(function(d) {
+            if (d.synonyms) {
+              container.append("<li><span class='frequent-term'>" + d.term + "</span> (" + d.repetitions + "): " + d.synonyms.join(', ') + "</li>");
+            }
+            else {
+              container.append("<li><span class='frequent-term'>" + d.term + "</span> (" + d.repetitions + ")</li>");
+            }
+            // container.append("<tr><td class='frequency'><span class='frequent-term'>" + d.term + "</span></td><td class='frequency right'>" + d.repetitions + "</tr>");
+          });
+        }
+
+        $('.frequent-term')
+          .mouseenter(function() {
+            google.script.run
+              .highlightOneTerm($(this).text(), "#ccccff");
+          })
+          .mouseleave(function() {
+            google.script.run
+              .highlightOneTerm($(this).text(), "#ffffff");
+          });
+
+      }
+
+      function onTextMetricsFailure(error) {
+        console.log(error);
+      }
+
+      function hexc(colourval) {
+        var parts = colourval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        delete(parts[0]);
+        for (var i = 1; i <= 3; ++i) {
+          parts[i] = parseInt(parts[i]).toString(16);
+          if (parts[i].length == 1) parts[i] = '0' + parts[i];
+        }
+        var colour = '#' + parts.slice(0,4).join('');
+        return colour;
+      }
+
+
+      /***** INITIAL SETUP *****/
+
+      var interval;
+      $("#planning-tool").hide(0);
+      $("#searching-tool").hide(0);
+      $("#translating-tool").hide(0);
+      $("#reviewing-tool").hide(0);
+      showTools("searching");
+
+      $('#reviewing-keywords-explanation').hide();
+
+
     </script>
 
   </body>
 </html>
-
-
